@@ -6,3 +6,5 @@
 **01 - Baby Steps**
 > Just something basic to init a project.
 
+**02 - Basic Server**
+> A basic running Node web server
