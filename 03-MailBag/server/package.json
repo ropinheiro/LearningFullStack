@@ -1,0 +1,14 @@
+{
+  "name": "mailbag-server",
+  "version": "1.0.0",
+  "description": "MFSD MailBag Server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Frank Zammetti / RMP",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^4.0.2"
+  }
+}

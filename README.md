@@ -8,3 +8,6 @@
 
 **02 - Basic Server**
 > A basic running Node web server
+
+**03 - Mail Bag**
+> Webmail application (chapters 8-9)
