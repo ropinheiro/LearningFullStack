@@ -28,8 +28,17 @@
 }
 `
 
+> Add a contact:
+> URL: localhost:8081/contacts
+> Method: POST
+> In the Body tab, choose raw and JSON (application/json)
+> Text:
+> `{ "name": "Rui Pinheiro", "email": "rmp@olipin.net" }`
+
 **Test MailBag server (with command line)**
 > Get mailboxes list: `curl localhost:8081/mailboxes`
 > Get messages in the INBOX mailbox: `curl localhost:8081/mailboxes/INBOX`
 > Get message with ID 1: `curl localhost:8081/messages/INBOX/1`
 > Delete message with ID 1: `curl -X DELETE localhost:8081/messages/INBOX/1`
+> Get contacts list: curl localhost:8081/contacts
+> Delete contact (ID is returned after an addition): `curl -X DELETE localhost:8081/contacts/NHFGNI8GeCRFdjoD`
