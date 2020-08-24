@@ -13,7 +13,23 @@
 **Run MailBag server (development mode)**
 > npm run dev
 
-**Test MailBag server**
-> Get mailboxes: `curl localhost:8081/mailboxes`
-> Get messages in a mailbox: `curl localhost:8081/mailboxes/INBOX`
+**Test MailBag server (with Postman)**
+> Send a message:
+> URL: localhost:8081/mailboxes
+> Method: POST
+> In the Body tab, choose raw and JSON (application/json)
+> Text:
+`
+{
+  "from": "rmp@olipin.net",
+  "to": "rmp@olipin.net",
+  "subject": "Testmail",
+  "text": "Dies ist eine Testmail"
+}
+`
+
+**Test MailBag server (with command line)**
+> Get mailboxes list: `curl localhost:8081/mailboxes`
+> Get messages in the INBOX mailbox: `curl localhost:8081/mailboxes/INBOX`
+> Get message with ID 1: `curl localhost:8081/messages/INBOX/1`
 

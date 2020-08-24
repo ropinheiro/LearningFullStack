@@ -3,6 +3,7 @@ import express, { Express, NextFunction, Request, Response } from "express";
 import { serverInfo } from "./ServerInfo";
 import * as IMAP from "./IMAP";
 import * as SMTP from "./SMTP";
+import { captureRejectionSymbol } from "events";
 // import * as Contacts from "./Contacts";
 // import { IContact } from "./Contacts";
 
@@ -50,10 +51,39 @@ app.get(
       });
       inResponse.json(messages);
     } catch (inError) {
+      console.log(inError);
       inResponse.send("error");
     }
   }
 );
+
+app.get(
+  "/messages/:mailbox/:id",
+  async (inRequest: Request, inResponse: Response) => {
+    try {
+      const imapWorker: IMAP.Worker = new IMAP.Worker(serverInfo);
+      const messageBody: string = await imapWorker.getMessageBody({
+        mailbox: inRequest.params.mailbox,
+        id: parseInt(inRequest.params.id, 10),
+      });
+      inResponse.send(messageBody);
+    } catch (inError) {
+      console.log(inError);
+      inResponse.send("error");
+    }
+  }
+);
+
+app.post("/messages", async (inRequest: Request, inResponse: Response) => {
+  try {
+    const smtpWorker: SMTP.Worker = new SMTP.Worker(serverInfo);
+    await smtpWorker.sendMessage(inRequest.body);
+    inResponse.send("ok");
+  } catch (inError) {
+    console.log(inError);
+    inResponse.send("error");
+  }
+});
 
 // Start app listening.
 app.listen(8081, () => {
