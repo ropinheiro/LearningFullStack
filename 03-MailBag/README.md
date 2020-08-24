@@ -14,4 +14,6 @@
 > npm run dev
 
 **Test MailBag server**
-> Get mailboxes: curl localhost:8081/mailboxes
+> Get mailboxes: `curl localhost:8081/mailboxes`
+> Get messages in a mailbox: `curl localhost:8081/mailboxes/INBOX`
+

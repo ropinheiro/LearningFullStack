@@ -40,6 +40,21 @@ app.get("/mailboxes", async (inRequest: Request, inResponse: Response) => {
   }
 });
 
+app.get(
+  "/mailboxes/:mailbox",
+  async (inRequest: Request, inResponse: Response) => {
+    try {
+      const imapWorker: IMAP.Worker = new IMAP.Worker(serverInfo);
+      const messages: IMAP.IMessage[] = await imapWorker.listMessages({
+        mailbox: inRequest.params.mailbox,
+      });
+      inResponse.json(messages);
+    } catch (inError) {
+      inResponse.send("error");
+    }
+  }
+);
+
 // Start app listening.
 app.listen(8081, () => {
   console.log("MailBag server open for requests");
