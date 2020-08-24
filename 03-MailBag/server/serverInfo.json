@@ -1,12 +1,12 @@
 {
   "smtp": {
-    "host": "mail.mydomain.com",
-    "port": 999,
-    "auth": { "user": "user@domain.com", "pass": "xxx" }
+    "host": "localhost",
+    "port": 3025,
+    "auth": { "user": "rmp@olipin.net", "pass": "rmp@olipin.net" }
   },
   "imap": {
-    "host": "mail.mydomain.com",
-    "port": 999,
-    "auth": { "user": "user@domain.com", "pass": "xxx" }
+    "host": "localhost",
+    "port": 3143,
+    "auth": { "user": "rmp@olipin.net", "pass": "rmp@olipin.net" }
   }
 }
