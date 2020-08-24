@@ -74,6 +74,23 @@ app.get(
   }
 );
 
+app.delete(
+  "/messages/:mailbox/:id",
+  async (inRequest: Request, inResponse: Response) => {
+    try {
+      const imapWorker: IMAP.Worker = new IMAP.Worker(serverInfo);
+      await imapWorker.deleteMessage({
+        mailbox: inRequest.params.mailbox,
+        id: parseInt(inRequest.params.id, 10),
+      });
+      inResponse.send("ok");
+    } catch (inError) {
+      console.log(inError);
+      inResponse.send("error");
+    }
+  }
+);
+
 app.post("/messages", async (inRequest: Request, inResponse: Response) => {
   try {
     const smtpWorker: SMTP.Worker = new SMTP.Worker(serverInfo);

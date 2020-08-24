@@ -32,4 +32,4 @@
 > Get mailboxes list: `curl localhost:8081/mailboxes`
 > Get messages in the INBOX mailbox: `curl localhost:8081/mailboxes/INBOX`
 > Get message with ID 1: `curl localhost:8081/messages/INBOX/1`
-
+> Delete message with ID 1: `curl -X DELETE localhost:8081/messages/INBOX/1`
