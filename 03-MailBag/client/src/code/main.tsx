@@ -18,3 +18,8 @@ async function getMailboxes () {
     baseComponent.state.addMailboxToList(inMailbox)
   })
 }
+
+getMailboxes().then(function () {
+  async function getContacts () {}
+  getContacts().then(() => baseComponent.state.showHidePleaseWait(false))
+})
