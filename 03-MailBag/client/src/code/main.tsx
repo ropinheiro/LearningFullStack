@@ -6,6 +6,7 @@ import ReactDOM from 'react-dom'
 
 import BaseLayout from './components/BaseLayout'
 import * as IMAP from './IMAP'
+import * as Contacts from './Contacts'
 
 // Start rendering and show cover while things are being loaded
 const baseComponent: any = ReactDOM.render(<BaseLayout />, document.body)
@@ -20,6 +21,12 @@ async function getMailboxes () {
 }
 
 getMailboxes().then(function () {
-  async function getContacts () {}
+  async function getContacts () {
+    const contactsWorker: Contacts.Worker = new Contacts.Worker()
+    const contacts: Contacts.IContact[] = await contactsWorker.listContacts()
+    contacts.forEach(inContact => {
+      baseComponent.state.addContactToList(inContact)
+    })
+  }
   getContacts().then(() => baseComponent.state.showHidePleaseWait(false))
 })
