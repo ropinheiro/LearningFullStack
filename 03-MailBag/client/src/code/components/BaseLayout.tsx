@@ -6,6 +6,7 @@ import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
 
 import Toolbar from './Toolbar'
+import MailboxList from './MailboxList'
 
 import { createState } from '../state'
 
@@ -31,7 +32,10 @@ class BaseLayout extends Component {
         <div className='toolbar'>
           <Toolbar state={this.state} />
         </div>
-        {/* /* TODO */}
+        <div className='mailboxList'>
+          <MailboxList state={this.state} />
+        </div>
+        {/* TODO */}
       </div>
     )
   }
