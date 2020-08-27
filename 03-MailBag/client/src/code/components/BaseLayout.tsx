@@ -26,7 +26,9 @@ class BaseLayout extends Component {
             Bitte warte einen Moment
           </DialogTitle>
           <DialogContent>
-            <DialogContentText>...Server wird kontaktiert...</DialogContentText>
+            <DialogContentText>
+              ... Daten vom Server abrufen ...
+            </DialogContentText>
           </DialogContent>
         </Dialog>
         <div className='toolbar'>
