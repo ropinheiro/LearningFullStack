@@ -9,6 +9,7 @@ import Toolbar from './Toolbar'
 import MailboxList from './MailboxList'
 import MessageList from './MessageList'
 import WelcomeView from './WelcomeView'
+import MessageView from './MessageView'
 
 import { createState } from '../state'
 
@@ -46,6 +47,10 @@ class BaseLayout extends Component {
           </div>
           <div className='centerViews'>
             {this.state.currentView === 'welcome' && <WelcomeView />}
+            {(this.state.currentView === 'message' ||
+              this.state.currentView === 'compose') && (
+              <MessageView state={this.state} />
+            )}
           </div>
         </div>
         {/* TODO */}
