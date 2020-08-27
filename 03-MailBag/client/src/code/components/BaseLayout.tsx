@@ -5,6 +5,8 @@ import DialogContent from '@material-ui/core/DialogContent'
 import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
 
+import Toolbar from './Toolbar'
+
 import { createState } from '../state'
 
 class BaseLayout extends Component {
@@ -13,25 +15,23 @@ class BaseLayout extends Component {
   render () {
     return (
       <div className='appContainer'>
-        {
-          <Dialog
-            open={this.state.pleaseWaitVisible}
-            disableBackdropClick={true}
-            disableEscapeKeyDown={true}
-            transitionDuration={0}
-          >
-            <DialogTitle style={{ textAlign: 'center' }}>
-              Bitte warte einen Moment
-            </DialogTitle>
-            <DialogContent>
-              <DialogContentText>
-                ...Server wird kontaktiert...
-              </DialogContentText>
-            </DialogContent>
-          </Dialog>
-
-          /* TODO */
-        }
+        <Dialog
+          open={this.state.pleaseWaitVisible}
+          disableBackdropClick={true}
+          disableEscapeKeyDown={true}
+          transitionDuration={0}
+        >
+          <DialogTitle style={{ textAlign: 'center' }}>
+            Bitte warte einen Moment
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText>...Server wird kontaktiert...</DialogContentText>
+          </DialogContent>
+        </Dialog>
+        <div className='toolbar'>
+          <Toolbar state={this.state} />
+        </div>
+        {/* /* TODO */}
       </div>
     )
   }
