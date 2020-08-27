@@ -8,6 +8,7 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import Toolbar from './Toolbar'
 import MailboxList from './MailboxList'
 import MessageList from './MessageList'
+import WelcomeView from './WelcomeView'
 
 import { createState } from '../state'
 
@@ -15,6 +16,7 @@ class BaseLayout extends Component {
   state = createState(this)
 
   render () {
+    console.log('Current View: ' + this.state.currentView)
     return (
       <div className='appContainer'>
         <Dialog
@@ -41,6 +43,9 @@ class BaseLayout extends Component {
         <div className='centerArea'>
           <div className='messageList'>
             <MessageList state={this.state} />
+          </div>
+          <div className='centerViews'>
+            {this.state.currentView === 'welcome' && <WelcomeView />}
           </div>
         </div>
         {/* TODO */}
