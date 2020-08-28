@@ -84,4 +84,22 @@ wsServer.on("connection", (socket: WebSocket) => {
   // Inform the player its pid.
   // Format: connected_<new player's pid>
   socket.send(`connected_${pid}`);
+
+  // --------------------------------------------------------------------------
+  // ...and start the game if 2 players are connected.
+  // --------------------------------------------------------------------------
+  if (Object.keys(players).length === 2) {
+    const shuffledLayout: number[][][] = shuffle();
+    wsServer.clients.forEach(function each(inClient: WebSocket) {
+      // Inform each player the game started and provide the tiles' layout
+      // Format: start_<shuffledLayout>
+      inClient.send(`start_${JSON.stringify(shuffledLayout)}`);
+    });
+  }
 });
+
+// TODO: return a shuffled tiles layout
+function shuffle(): number[][][] {
+  const cl: number[][][] = [];
+  return cl;
+}
