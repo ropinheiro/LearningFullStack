@@ -31,7 +31,14 @@ wsServer.on("connection", (socket: WebSocket) => {
     const message: string = msgParts[0];
     const pid: string = msgParts[1];
     switch (message) {
-      // TODO
+      // Tile pair is matched (match_<pid>_<points>)
+      case "match":
+        players[pid].score += parseInt(msgParts[2]);
+        wsServer.clients.forEach(function each(inClient: WebSocket) {
+          inClient.send(`update_${pid}_${players[pid].score}`);
+        });
+        break;
+      // TODO: other cases
     }
   });
 });
