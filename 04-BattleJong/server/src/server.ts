@@ -166,6 +166,37 @@ const layout: number[][][] = [
 
 // TODO: return a shuffled tiles layout
 function shuffle(): number[][][] {
-  const cl: number[][][] = [];
+  const cl: number[][][] = layout.slice(0);
+
+  // There are 42 different tiles.
+  // They will be represented by images, whose filenames will be named
+  // from tile101.png to tile142.png, so we will replace the 1's
+  // by numbers from 101 to 142.
+  // The tile number 101 is a special wildcard tile.
+  // By game rules, only 4 wildcards can exist (a max of 4 tiles 101).
+
+  let numWildcards: number = 0;
+  const numTileTypes: number = 42;
+
+  for (let l: number = 0; l < cl.length; l++) {
+    const layer: number[][] = cl[l];
+    for (let r: number = 0; r < layer.length; r++) {
+      const row: number[] = layer[r];
+      for (let c: number = 0; c < row.length; c++) {
+        const tileVal: number = row[c];
+        if (tileVal === 1) {
+          row[c] = Math.floor(Math.random() * numTileTypes) + 101;
+          if (row[c] === 101 && numWildcards === 3) {
+            // hack: if there are already 4 wildcards (tile 101),
+            // instead of complicating the code to get another
+            // random tile, just use the tile 102 instead.
+            row[c] = 102;
+          } else {
+            numWildcards += numWildcards;
+          }
+        }
+      }
+    }
+  }
   return cl;
 }
