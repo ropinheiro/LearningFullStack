@@ -1,5 +1,7 @@
 import React from "react";
 
+import { createSocketComm } from "./socketComm";
+
 interface ISelectedTile {
   layer: number;
   row: number;
@@ -18,6 +20,40 @@ export function createState(inParentComponent: React.Component) {
     scores: <IScores>{ player: 0, opponent: 0 },
     gameState: <string>"awaitingOpponent",
     gameOutcome: <string>"",
+
+    handleMessage_connected: function (inPID: string) {
+      this.setState({ pid: inPID });
+    }.bind(inParentComponent),
+
+    handleMessage_start: function (inLayout: number[][][]) {
+      this.setState({
+        timeSinceLastMatch: new Date().getTime(),
+        layout: inLayout,
+        gameState: "playing",
+      });
+    }.bind(inParentComponent),
+
+    handleMessage_update: function (inPID: string, inScore: number) {
+      if (inPID !== this.state.pid) {
+        const scores: IScores = { ...this.state.scores };
+        scores.opponent = inScore;
+        this.setState({ scores: scores });
+      }
+    }.bind(inParentComponent),
+
+    handleMessage_gameOver: function (inPID: string) {
+      if (inPID === this.state.pid) {
+        this.setState({
+          gameState: "gameOver",
+          gameOutcome: "**** YOU WON! ****",
+        });
+      } else {
+        this.setState({
+          gameState: "gameOver",
+          gameOutcome: "Tough luck, you lost :(",
+        });
+      }
+    }.bind(inParentComponent),
 
     tileClick: function (inLayer: number, inRow: number, inColumn: number) {
       if (this.state.gameState !== "playing") {
