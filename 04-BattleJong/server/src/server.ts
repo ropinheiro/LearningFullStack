@@ -12,3 +12,12 @@ app.use("/", express.static(path.join(__dirname, "../../client/dist")));
 app.listen(80, () => {
   console.log("BattleJong Express server ready");
 });
+
+// WebSocket server
+const wsServer = new WebSocket.Server({ port: 8080 }, function () {
+  console.log("BattleJong WebSocket server ready");
+});
+
+wsServer.on("connection", (socket: WebSocket) => {
+  console.log("Player connected");
+});
