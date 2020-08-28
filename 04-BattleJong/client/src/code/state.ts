@@ -20,6 +20,9 @@ export function createState(inParentComponent: React.Component) {
     scores: <IScores>{ player: 0, opponent: 0 },
     gameState: <string>"awaitingOpponent",
     gameOutcome: <string>"",
+    pid: <string>"",
+    socketComm: <Function>createSocketComm(inParentComponent),
+    timeSinceLastMatch: <number>0,
 
     handleMessage_connected: function (inPID: string) {
       this.setState({ pid: inPID });
