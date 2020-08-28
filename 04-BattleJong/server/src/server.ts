@@ -22,7 +22,9 @@ const wsServer = new WebSocket.Server({ port: 8080 }, function () {
 wsServer.on("connection", (socket: WebSocket) => {
   console.log("Player connected");
 
-  // ...hook up message handler
+  // --------------------------------------------------------------------------
+  // ...hook up message handler,
+  // --------------------------------------------------------------------------
   socket.on("message", (inMsg: string) => {
     console.log(`Message: ${inMsg}`);
 
@@ -72,4 +74,14 @@ wsServer.on("connection", (socket: WebSocket) => {
         break;
     }
   });
+
+  // --------------------------------------------------------------------------
+  // ...initialize the player,
+  // --------------------------------------------------------------------------
+  const pid: string = `pid${new Date().getTime()}`;
+  players[pid] = { score: 0, stillPlaying: true };
+
+  // Inform the player its pid.
+  // Format: connected_<new player's pid>
+  socket.send(`connected_${pid}`);
 });
