@@ -65,3 +65,26 @@ The Greenmail was used to prevent the need of a real mail configuration and also
 ## Run MailBag client (development mode)
 
 > TODO
+
+
+## Build a Docker image
+
+Note: this assumes a repository in DockerHub exists in
+      `ropinheiro/modern-full-stack-development-mailbag`
+
+> Open a Windows PowerShell prompt and go to the Dockerfile's folder (hopefully the same than this README.md)
+
+> The following builds the Docker image:
+>> docker build -t mailbag .
+
+> The following tags the Docker image to the DockerHub path:
+>> docker tag mailbag ropinheiro/modern-full-stack-development-mailbag
+
+> The following sends the Docker image to the DockerHub repository:
+>> docker push ropinheiro/modern-full-stack-development-mailbag
+
+> The following runs a container from that image
+>> docker run --name mailbag -d mailbag
+
+> Test it with pointing your browser to http://localhost:8081/mailboxes
+>> Note: you must have the Greenmail container running as described previously. 
